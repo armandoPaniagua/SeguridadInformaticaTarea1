@@ -1,0 +1,22 @@
+#Programa Cliente para realizar una conexión via Socket al localhost
+#Llamar la ubicación de python
+
+#!/usr/bin/env python  
+ 
+import socket #Importamos la libreria Socket
+ 
+
+clientsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #Creación de Socket
+
+clientsocket.connect(('localhost',8000))#Ip y puerto 
+ 
+
+while True:
+        
+        data = raw_input('>') #Mensaje
+        clientsocket.send(data) #Envio de mensaje a través de la variable data
+        if not data: break #Si no hay datos termina la conexión
+        newdata = clientsocket.recv(1024) #Se recibe el mensaje
+        print 'servidor: %s' % newdata #Mensaje recibido
+        
+clientsocket.close() #Cerrando la conexión 
